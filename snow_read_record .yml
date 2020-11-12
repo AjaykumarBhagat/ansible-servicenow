@@ -1,0 +1,22 @@
+---
+- name: Read ticket info 
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    snow_credentials.yml
+
+  tasks:
+
+  - name: Read record
+    snow_record_find:
+      username: "{{ sn_username }}"
+      password: "{{ sn_password }}"
+      instance: "{{ sn_instance }}"
+      table: incident
+      query:
+        number: INC0010111
+    register: output
+ 
+  - debug:
+       var: output
