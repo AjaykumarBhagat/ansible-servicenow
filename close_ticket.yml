@@ -1,0 +1,25 @@
+---
+- name: Close ticket
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+    - ticket_no: INC0010001
+
+  tasks:
+
+  - name: Change incident state
+    snow_record:
+      number: "{{ ticket_no }}"
+      state: present
+      #table: incident
+      username: "{{ lookup('env', 'SERVICENOW_USER') }}"
+      password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
+      instance: "{{ lookup('env', 'SERVICENOW_INSTANCE_ID') }}"
+      data:
+        incident_state: 6
+        close_notes: "False outage"
+    register: output
+
+  - debug: 
+      var: output
