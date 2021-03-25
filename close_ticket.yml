@@ -17,7 +17,7 @@
       password: "{{ lookup('env', 'SERVICENOW_PASSWORD') }}"
       instance: "{{ lookup('env', 'SERVICENOW_INSTANCE_ID') }}"
       data:
-        incident_state: 6
+        incident_state: 6   # 6: resolved,  7: closed  
         close_notes: "False outage"
     register: output
 
